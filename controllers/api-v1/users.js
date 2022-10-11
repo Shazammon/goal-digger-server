@@ -204,25 +204,6 @@ router.put("/goals/:goalId/status", authLockedRoute, async(req,res) => {
 })
 
 
-router.put("/goals", authLockedRoute, async(req,res) => {
-  try {
-    // console.log(res.locals.user)
-          const oneUser = await db.User.findOneAndUpdate({
-              _id: res.locals.user._id
-          },{
-            content: req.body.content,
-            img_url: req.body.img_url
-          },{
-            new:true
-          })
-  
-          res.json(oneUser)
-  
-      } catch(err) {
-      console.log(err)
-      return res.status(500).json({error: "Server Error"})        
-  }
-})
 
 // GET /auth-locked - will redirect if bad jwt token is found
 router.get('/auth-locked', authLockedRoute, (req, res) => {
